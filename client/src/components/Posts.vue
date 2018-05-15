@@ -11,7 +11,7 @@
           <td width="550">Description</td>
           <td width="100" align="center">Action</td>
         </tr>
-        <tr v-for="post in posts">
+        <tr v-for="post in posts" :key="post.id">
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
           <td align="center">
@@ -30,6 +30,7 @@
 
 <script>
 import PostsService from '@/services/PostsService'
+import EtherscanService from '@/services/EtherscanService'
 export default {
   name: 'posts',
   data () {
@@ -39,6 +40,7 @@ export default {
   },
   mounted () {
     this.getPosts()
+    this.getTransactions()
   },
   methods: {
     async getPosts () {
@@ -61,6 +63,16 @@ export default {
           path: '/'
         })
       })
+    },
+    async getTransactions () {
+      const transactions = await EtherscanService.fetchTransactions({
+        module: 'account',
+        action: 'txlist',
+        address: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
+        sort: 'asc',
+        apikey: 'CQ6UT4MA3Q5N6QKZ338IHNGJVEDEEVPK8X'
+      })
+      console.log(transactions)
     }
   }
 }

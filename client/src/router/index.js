@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Posts from '@/components/Posts'
 import addpost from '@/components/AddPost'
 import editpost from '@/components/EditPost'
+import transactions from '@/components/Transactions'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/posts/:id/edit',
       component: editpost,
       name: 'editpost'
+    },
+    {
+      path: '/transactions',
+      component: transactions,
+      name: 'transactions'
     }
   ]
 })
